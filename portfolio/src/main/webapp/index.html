@@ -2,17 +2,62 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>DAVIDVARGAS</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
   <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+    <div class="all-content" id="content">
+        <table id="allTable" class="table-allInfo">
+            <tr>
+                <td id="name">David Vargas Puga</td>
+            </tr>
+            <tr>
+                <td id="aboutMe">About Me</td>
+            </tr>
+            <tr>
+                <td bgcolor="#FFA500" id="aboutMe-info">A bilingual and extroverted Computer Science and Spanish double-major with exceptional communication, interpersonal and leadership skills. First-generation student who thrives in cultures that embrace diversity and reward imagination. Experience in software engineering, Android development and machine learning. </td>
+            </tr>
+            <tr>
+                <td id="socials-row">
+                    <ul id="socials">
+                        <li id="github">
+                            <a href="https://github.com/davidvargaspuga"><img id="github-img" src="./images/github_logo_trans.png" /></a>
+                        <li>
+                        <li id="linkedin">
+                            <a href="https://www.linkedin.com/in/david-vargas-puga/"><img id="linkedin-img" src="./images/linkedin_logo.png" /></a>
+                        <li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td id="projects">Projects</td>
+            </tr>
+            <tr>
+                <td>Project 1</td>
+            </tr>
+            <tr>
+                <td>Project 2</td>
+            </tr>
+            <!-- <tr>
+                <td>Contact Info</td>
+            </tr> -->
+            <!-- <tr>
+                <td>
+                    <ul id="contact-info">
+                        <li id="email">
+                            Email
+                        <li>
+                        <li id="phone">
+                            Phone
+                        <li>
+                    </ul>
+                </td>
+            </tr> -->
+        </table>
     </div>
+      <!-- <p>Click here to get a random message:</p>
+      <button onclick="addRandomGreeting()">Hello</button>
+      <div id="greeting-container"></div> -->
   </body>
 </html>
