@@ -3,6 +3,7 @@ html, body {
     margin: 0;   
 }
 
+/* adds the dimensions for webpage */
 .all-content{
   margin: auto;
   width: 60%;
@@ -16,7 +17,7 @@ html, body {
     font-family: Tahoma, Geneva, sans-serif;
 }
 
-td#aboutMe-info{
+td#about-me-info{
     font-size: 125%;
 }
 
@@ -28,7 +29,7 @@ img#avatar{
     External Citation:
     https://www.webfx.com/blog/web-design/circular-images-css/
 */
-.circular--square {
+.circular-square {
     border-radius: 50%;
   }
 
@@ -36,17 +37,17 @@ img#avatar{
     External Citation:
     https://www.cssfontstack.com/Helvetica
 */
-h2.section-titles{
+.section-titles{
     font-family: Helvetica; font-size: 30px; font-style: normal; font-variant: normal; font-weight: bold; line-height: 23px;
     text-align: left;
 }
 
-p.project-titles{
+.project-titles{
     font: "Times New Roman", Times, serif; 
     font-size: 130%;
 }
 
-ul.project-info{
+.project-info{
     font: "Times New Roman", Times, serif; 
     font-size: 110%;
     text-align: left;
@@ -59,13 +60,13 @@ ul#socials{
     padding: 0px;
 
 }
+
 ul#socials li {
     display:inline;
     margin: 0 10px;
 }
 
-
-img.social-img{
+.social-img{
     height: 50px;
 }
 
@@ -95,4 +96,7 @@ margin-top: -10px;
     clear: both;
 }
 
-
+/* images in "Pictures of My Life" section */
+img.mylife-pics{
+    width: 100%;
+}
