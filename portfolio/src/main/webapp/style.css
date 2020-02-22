@@ -17,11 +17,11 @@ html, body {
     font-family: Tahoma, Geneva, sans-serif;
 }
 
-td#about-me-info{
+#about-me-info{
     font-size: 125%;
 }
 
-img#avatar{
+#avatar{
     height: 300px;
 }
 
@@ -53,7 +53,7 @@ img#avatar{
     text-align: left;
 }
 
-ul#socials{
+#socials{
     max-height: 20%;
     max-width: auto;
     margin: 0px;
@@ -61,7 +61,7 @@ ul#socials{
 
 }
 
-ul#socials li {
+#socials li {
     display:inline;
     margin: 0 10px;
 }
