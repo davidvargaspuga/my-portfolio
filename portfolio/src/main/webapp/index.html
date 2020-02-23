@@ -7,6 +7,13 @@
     <script src="script.js"></script>
   </head>
   <body>
+    <button onclick="topFunction()" id="toTop">Top</button>
+    <div class="tab">
+        <button onclick="document.getElementById('socials').scrollIntoView();">Socials</a>
+        <button onclick="document.getElementById('about-me').scrollIntoView();">About Me</a>
+        <button onclick="document.getElementById('projects').scrollIntoView();">Projects</a>
+        <button onclick="document.getElementById('pictures').scrollIntoView();">Pictures</a>
+    </div>
     <div class="all-content" id="content">
         <table>
             <tr>
@@ -33,13 +40,13 @@
                 </td>
             </tr>
             <tr>
-                <td><h2 class="section-titles">About Me</h2></td>
+                <td id="about-me"><h2 class="section-titles">About Me</h2></td>
             </tr>
             <tr>
                 <td id="about-me-info">A bilingual and extroverted Computer Science and Spanish double-major at the University of Portland with exceptional communication, interpersonal and leadership skills. First-generation student who thrives in cultures that embrace diversity and reward imagination. Experience in software engineering, Android development and machine learning. </td>
             </tr>
             <tr>
-                <td><h2 class="section-titles">Projects</h2></td>
+                <td id="projects"><h2 class="section-titles">Projects</h2></td>
             </tr>
             <tr>
                 <td>
@@ -87,7 +94,7 @@
                 </td>
             </tr>
             <tr>
-                <td><h2 class="section-titles">Pictures of My Life</h2></td>
+                <td id="pictures"><h2 class="section-titles">Pictures of My Life</h2></td>
             </tr>
             <tr>
                 <td>
