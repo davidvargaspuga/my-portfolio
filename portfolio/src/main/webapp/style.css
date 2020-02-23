@@ -44,11 +44,11 @@ html, body {
     font-size: 25px;
     color: #DCDCDC;
 }
-.tab button:hover {
+.tab button:hover, #to-top:hover{
   background-color: midnightblue;
 }
 
-#toTop {
+#to-top {
   display: none;
   position: fixed;
   bottom: 20px;
