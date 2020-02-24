@@ -7,7 +7,7 @@ html, body {
 /* adds the dimensions for webpage */
 .all-content, .tab{
   margin: auto;
-  width: 60%;
+  width: 75%;
   /* border: 3px solid red; */
   padding: 0px;
   text-align: center;
@@ -39,7 +39,7 @@ html, body {
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 5px 25px;
+    padding: 5px 40px;
     transition: 0.3s;
     font-size: 25px;
     color: #DCDCDC;
