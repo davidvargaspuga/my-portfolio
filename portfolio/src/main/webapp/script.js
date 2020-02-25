@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+fetch('/data').then(response => response.json()).then((data) => {
+        console.log(data[0]);
+});
 
 // External Citation:
 // https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
@@ -28,4 +31,19 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
+var getData;
+// External Citation:
+// https://www.quora.com/How-can-I-make-a-comment-box-in-HTML
+(getData = function getData(){
+    fetch('/data').then(response => response.json()).then((data) => {
+        console.log(data[0]);
+        var displayComments = document.getElementById('display-comments');
+        var comment;
+        for(comment in data){
+            console.log(data[comment]);
+            displayComments.innerHTML += "" + data[comment] + "<br/>";
+        }
+    });
+})();
 
