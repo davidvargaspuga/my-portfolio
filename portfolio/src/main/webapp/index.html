@@ -121,10 +121,13 @@
             </tr>
         </table>
     </div>
-    <div class="comments">
-        <textarea id="comment-box"></textarea>
-    </div>
-    <div id="display-comments">
-    </div>
+    <form action="/data" method="POST">
+        <div class="comments">
+            <textarea name="comment-box"></textarea>
+            <input type="submit"/>
+        </div>
+        <div id="display-comments">
+        </div>
+    </form>
   </body>
 </html>
