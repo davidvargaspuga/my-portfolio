@@ -13,6 +13,7 @@
 // limitations under the License.
 
 
+
 // External Citation:
 // https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
 var toTopButton = document.getElementById("to-top"); 
@@ -28,4 +29,19 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
+
+// External Citation:
+// https://www.quora.com/How-can-I-make-a-comment-box-in-HTML
+// This code gets comment data from the /data backend path and updates the #display-comments element
+// with comment data.
+fetch('/data').then(response => response.json()).then((data) => {
+    var displayComments = document.getElementById('display-comments');
+    var commentIdx;
+    for(commentIdx in data){
+        console.log(data[commentIdx]);
+        displayComments.innerHTML += "" + data[commentIdx] + "<br/>";
+    }
+});
+
 

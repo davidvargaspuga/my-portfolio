@@ -25,6 +25,27 @@ function getRandomQuote() {
   responsePromise.then(handleResponse);
 }
 
+function getHello(){
+    console.log('Fetching greeting: ');
+
+    const responsePromise = fetch('/data');
+
+    responsePromise.then(handleDataResponse);
+
+    // responsePromise.then(addGreetingToDom);
+}
+function handleDataResponse(response) {
+  console.log('Handling the response.');
+
+  // response.text() returns a Promise, because the response is a stream of
+  // content and not a simple variable.
+  const textPromise = response.text();
+
+  // When the response is converted to text, pass the result into the
+  // addQuoteToDom() function.
+  textPromise.then(addGreetingToDom);
+}
+
 /**
  * Handles response by converting it to text and passing the result to
  * addQuoteToDom().
@@ -40,6 +61,14 @@ function handleResponse(response) {
   // addQuoteToDom() function.
   textPromise.then(addQuoteToDom);
 }
+
+function addGreetingToDom(greeting) {
+  console.log('Adding greeting to dom: ' + greeting);
+
+  const greetingContainer = document.getElementById('greeting-container');
+  greetingContainer.innerText = greeting;
+}
+
 
 /** Adds a random quote to the DOM. */
 function addQuoteToDom(quote) {
