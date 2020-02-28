@@ -17,8 +17,13 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import com.google.gson.Gson;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
@@ -29,30 +34,49 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-    private List<String> comments;
-  @Override
-  public void init() { 
-     comments = new ArrayList<>();
-  }
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    String json = new Gson().toJson(comments);
+    // initialize comments list and query
+    List<String> commentsList = new ArrayList<>();
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    
+    // call datastore query to retrieve Comment Entity's
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    //iterate through Comment Entity's retrieved and add comments to list
+    for (Entity entity : results.asIterable()) {
+      String commentFromData = (String) entity.getProperty("comment");
+        System.out.println(commentFromData);
+      commentsList.add(commentFromData);
+    }
+
+    // convert comments list to JSON and send it to main page
+    response.setContentType("/index.html;");
+    String json = new Gson().toJson(commentsList);
+    System.out.println(json);
     response.getWriter().println(json);
+    
+    
   }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // initalize elements of the comment
         String comment = request.getParameter("comment-box");
         long timestamp = System.currentTimeMillis();
+
+        //initialize the comment entitiy and put in datastore
         Entity commentEntity = new Entity("Comment");
+        commentEntity.setProperty("timestamp", timestamp);
         if(comment != null){
             commentEntity.setProperty("comment", comment);
-            commentEntity.setProperty("timestamp", timestamp);
         }
-        
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         datastore.put(commentEntity);
+
+        // redirects to main page
         response.sendRedirect("/index.html");
     }
 }
