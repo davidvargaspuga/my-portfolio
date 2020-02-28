@@ -121,11 +121,13 @@
             </tr>
         </table>
     </div>
-    <form action="/data" method="POST">
+    <!-- POST request for comment below -->
+    <form action="/data" method="POST" onsubmit="return emptyBox()">
         <div class="comments">
-            <textarea name="comment-box"></textarea>
+            <textarea name="comment-box" id="comments-box"></textarea>
             <input type="submit"/>
         </div>
+        <!-- Comments displayed below -->
         <div id="display-comments">
         </div>
     </form>

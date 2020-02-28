@@ -12,7 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
+// checks if text area is empty
+function emptyBox(){
+    if (document.getElementById('comments-box').value == '') {
+        alert('Enter a valid comment.'); 
+        return false;  // stop submission until textbox is not ''
+    }
+    else return true;
+}
 
 // External Citation:
 // https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
@@ -35,13 +42,13 @@ function topFunction() {
 // https://www.quora.com/How-can-I-make-a-comment-box-in-HTML
 // This code gets comment data from the /data backend path and updates the #display-comments element
 // with comment data.
-fetch('/data').then(response => response.json()).then((data) => {
+fetch('/data').then(response => response.json()).then((comments) => {
     var displayComments = document.getElementById('display-comments');
-    var commentIdx;
-    for(commentIdx in data){
-        console.log(data[commentIdx]);
-        displayComments.innerHTML += "" + data[commentIdx] + "<br/>";
-    }
+
+    comments.forEach((comment) => {
+        console.log(comment);
+        displayComments.innerHTML += "" + comment + "<br/>";
+    })
 });
 
 
