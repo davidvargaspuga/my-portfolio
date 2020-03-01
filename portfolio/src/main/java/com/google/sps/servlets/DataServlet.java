@@ -65,7 +65,7 @@ public class DataServlet extends HttpServlet {
         String comment = request.getParameter("comment-box");
         long timestamp = System.currentTimeMillis();
 
-        //initialize the comment entitiy and put in datastore
+        //initialize the comment entity and put in datastore
         Entity commentEntity = new Entity("Comment");
         commentEntity.setProperty("timestamp", timestamp);
         if(comment != null){
