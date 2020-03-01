@@ -48,14 +48,12 @@ public class DataServlet extends HttpServlet {
     //iterate through Comment Entity's retrieved and add comments to list
     for (Entity entity : results.asIterable()) {
       String commentFromData = (String) entity.getProperty("comment");
-        System.out.println(commentFromData);
       commentsList.add(commentFromData);
     }
 
     // convert comments list to JSON and send it to main page
     response.setContentType("/index.html;");
     String json = new Gson().toJson(commentsList);
-    System.out.println(json);
     response.getWriter().println(json);
     
     
