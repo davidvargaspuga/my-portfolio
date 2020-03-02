@@ -121,13 +121,17 @@
             </tr>
         </table>
     </div>
-    <form action="/data" method="POST">
+    <!-- POST request for comment below -->
+    <!-- returns the value of emptyBox to determine of the POST request must be canceled
+    due to an empty text box -->
+    <form action="/data" method="POST" onsubmit="return emptyBox()">
         <div class="comments">
-            <textarea name="comment-box"></textarea>
+            <textarea name="comment-box" id="comments-box"></textarea>
             <input type="submit"/>
         </div>
-        <div id="display-comments">
-        </div>
     </form>
+    <!-- Comments displayed below -->
+    <div id="display-comments">
+    </div>
   </body>
 </html>
