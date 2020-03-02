@@ -48,14 +48,12 @@ public class DataServlet extends HttpServlet {
     //iterate through Comment Entity's retrieved and add comments to list
     for (Entity entity : results.asIterable()) {
       String commentFromData = (String) entity.getProperty("comment");
-        System.out.println(commentFromData);
       commentsList.add(commentFromData);
     }
 
     // convert comments list to JSON and send it to main page
     response.setContentType("/index.html;");
     String json = new Gson().toJson(commentsList);
-    System.out.println(json);
     response.getWriter().println(json);
     
     
@@ -67,7 +65,7 @@ public class DataServlet extends HttpServlet {
         String comment = request.getParameter("comment-box");
         long timestamp = System.currentTimeMillis();
 
-        //initialize the comment entitiy and put in datastore
+        //initialize the comment entity and put in datastore
         Entity commentEntity = new Entity("Comment");
         commentEntity.setProperty("timestamp", timestamp);
         if(comment != null){
