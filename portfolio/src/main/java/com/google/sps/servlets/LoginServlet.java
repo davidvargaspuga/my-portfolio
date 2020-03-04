@@ -38,15 +38,15 @@ public class LoginServlet extends HttpServlet {
     PrintWriter out = response.getWriter();
     UserService userService = UserServiceFactory.getUserService();
 
+    // user is not logged in
     if(!userService.isUserLoggedIn()){
         String loginUrl = userService.createLoginURL("/login");
         out.println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
         return;
     }
 
+    // User is logged in 
     String userEmail = userService.getCurrentUser().getEmail();
-    
-       // User is logged in and has a nickname, so the request can proceed
     String logoutUrl = userService.createLogoutURL("/");
     out.println("<h1>Home</h1>");
     out.println("<p>Hello " + userEmail + "!</p>");
