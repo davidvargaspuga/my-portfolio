@@ -41,6 +41,9 @@ public class LoginServlet extends HttpServlet {
     
     String loginURL = userService.createLoginURL("/");
     boolean isLoggedIn = userService.isUserLoggedIn();
+
+    //returns login link as a string if not logged in
+    // otherwise, returns true as a boolean
     if(!isLoggedIn){
         out.println("<p>Login <a href=\"" + loginURL + "\">here</a> to comment!</p>");
         return;
@@ -48,4 +51,5 @@ public class LoginServlet extends HttpServlet {
         String json = new Gson().toJson(isLoggedIn);
         out.println(json);
     } 
+  }
 }
