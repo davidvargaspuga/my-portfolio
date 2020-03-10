@@ -51,4 +51,12 @@ fetch('/data').then(response => response.json()).then((comments) => {
     })
 });
 
+// If user is logged in, display website
+// Otherwise, ask to login.
+// isLoggedIn: boolean of false or string of login here message
+fetch('/login').then(response => response.json()).then((isLoggedIn) => {
+    if(isLoggedIn) document.getElementById("comment-form").style.display = "block";
+    else document.getElementById("login-message").innerHTML = isLoggedIn;
+});
+
 

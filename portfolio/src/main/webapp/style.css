@@ -18,7 +18,7 @@ html, body {
     font-family: Tahoma, Geneva, sans-serif;
 }
 
-#info{
+#info, #login-message{
     font-size: 125%;
 }
 
@@ -144,6 +144,9 @@ img.mylife-pics{
     width: 100%;
 }
 
+#comment-form{
+    display: none
+}
 
 /*  External Citation:
     https://stackoverflow.com/questions/52321212/iphone-xr-xs-xs-max-css-media-queries
