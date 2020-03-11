@@ -23,6 +23,7 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
+import com.google.gson.Gson;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,24 +38,18 @@ public class LoginServlet extends HttpServlet {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
     UserService userService = UserServiceFactory.getUserService();
+    
+    String loginURL = userService.createLoginURL("/");
+    boolean isLoggedIn = userService.isUserLoggedIn();
 
-    // user is not logged in
-    if(!userService.isUserLoggedIn()){
-        String loginUrl = userService.createLoginURL("/login");
-        out.println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
+    //returns login link as a string if not logged in
+    // otherwise, returns true as a boolean
+    if(!isLoggedIn){
+        out.println("<p>Login <a href=\"" + loginURL + "\">here</a> to comment!</p>");
         return;
-    }
-
-    // User is logged in 
-    String userEmail = userService.getCurrentUser().getEmail();
-    String logoutUrl = userService.createLogoutURL("/");
-    out.println("<h1>Home</h1>");
-    out.println("<p>Hello " + userEmail + "!</p>");
-    out.println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
-  }
-
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+    } else{
+        String json = new Gson().toJson(isLoggedIn);
+        out.println(json);
+    } 
   }
 }

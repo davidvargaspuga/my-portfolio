@@ -119,19 +119,34 @@
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td><h2 class="section-titles">Comments</h2></td>
+            </tr>
+            <tr>
+                <td>
+                    <!-- POST request for comment below -->
+                    <!-- returns the value of emptyBox to determine of the POST request must be canceled
+                    due to an empty text box -->
+                    <form action="/data" method="POST" onsubmit="return emptyBox()" id="comment-form">
+                        <h3 id="login-message"></h3>
+                        <div class="comments">
+                            <textarea name="comment-box" id="comments-box"></textarea>
+                            <input type="submit"/>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td id="login-message"></td>
+            </tr>
+            <tr>
+                <td>
+                    <!-- Comments displayed below -->
+                    <div id="display-comments">
+                    </div>
+                </td>
+            </tr>
         </table>
-    </div>
-    <!-- POST request for comment below -->
-    <!-- returns the value of emptyBox to determine of the POST request must be canceled
-    due to an empty text box -->
-    <form action="/data" method="POST" onsubmit="return emptyBox()">
-        <div class="comments">
-            <textarea name="comment-box" id="comments-box"></textarea>
-            <input type="submit"/>
-        </div>
-    </form>
-    <!-- Comments displayed below -->
-    <div id="display-comments">
     </div>
   </body>
 </html>
