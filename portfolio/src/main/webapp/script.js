@@ -42,13 +42,17 @@ function topFunction() {
 // https://www.quora.com/How-can-I-make-a-comment-box-in-HTML
 // This code gets comment data from the /data backend path and updates the #display-comments element
 // with comment data.
-fetch('/data').then(response => response.json()).then((comments) => {
+fetch('/data').then(response => response.json()).then((data) => {
     var displayComments = document.getElementById('display-comments');
+    var comment;
+    var email;
 
-    comments.forEach((comment) => {
-        console.log(comment);
-        displayComments.innerHTML += "" + comment + "<br/>";
-    })
+    //retrieves comment and email and displays
+    for (var i = 0; i < data.comments.length; i++) {
+        comment = data.comments[i];
+        email = data.email[i];
+        displayComments.innerHTML += "" + email + ": "+ comment + "<br/>";
+    }
 });
 
 // If user is logged in, display website

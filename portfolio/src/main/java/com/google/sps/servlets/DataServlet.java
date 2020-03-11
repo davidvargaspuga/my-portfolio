@@ -20,7 +20,13 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONString;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,23 +44,37 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // initialize comments list and query
-    List<String> commentsList = new ArrayList<>();
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    // List<String> commentsList = new ArrayList<>();
+    try {
+        JSONArray commentList = new JSONArray();
+        JSONArray emailList = new JSONArray();
+        JSONObject j = new JSONObject();
+        Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+
+        // call datastore query to retrieve Comment Entity's
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        PreparedQuery results = datastore.prepare(query);
+
+        //iterate through Comment Entity's retrieved and add comments to list
+        for (Entity entity : results.asIterable()) {
+            String commentFromData = (String) entity.getProperty("comment");
+            String emailFromData = (String) entity.getProperty("email");
+            commentList.put(commentFromData);
+            emailList.put(emailFromData);
+            //   commentsList.add(commentFromData);
+        }
+
+        j.put("comments", commentList);
+        j.put("email", emailList);
+
+        // convert comments list to JSON and send it to main page
+        // response.setContentType("/index.html;");
+        // String json = new Gson().toJson(commentsList);
+        response.getWriter().println(j);
+     } catch (JSONException e) {
+         throw new RuntimeException(e);
+     }
     
-    // call datastore query to retrieve Comment Entity's
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    PreparedQuery results = datastore.prepare(query);
-
-    //iterate through Comment Entity's retrieved and add comments to list
-    for (Entity entity : results.asIterable()) {
-      String commentFromData = (String) entity.getProperty("comment");
-      commentsList.add(commentFromData);
-    }
-
-    // convert comments list to JSON and send it to main page
-    response.setContentType("/index.html;");
-    String json = new Gson().toJson(commentsList);
-    response.getWriter().println(json);
     
     
   }
@@ -64,13 +84,17 @@ public class DataServlet extends HttpServlet {
         // initalize elements of the comment
         String comment = request.getParameter("comment-box");
         long timestamp = System.currentTimeMillis();
+        UserService userService = UserServiceFactory.getUserService();
+        String email = userService.getCurrentUser().getEmail();
 
         //initialize the comment entity and put in datastore
         Entity commentEntity = new Entity("Comment");
         commentEntity.setProperty("timestamp", timestamp);
+        commentEntity.setProperty("email", email);
         if(comment != null){
             commentEntity.setProperty("comment", comment);
         }
+        
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         datastore.put(commentEntity);
 

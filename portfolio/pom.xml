@@ -16,7 +16,12 @@
     <failOnMissingWebXml>false</failOnMissingWebXml>
   </properties>
 
-  <dependencies>
+  <dependencies> 
+    <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>20090211</version>
+    </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
@@ -37,6 +42,11 @@
         <groupId>com.google.appengine</groupId>
         <artifactId>appengine-api-1.0-sdk</artifactId>
         <version>1.9.59</version>
+    </dependency>
+    <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>org.json</artifactId>
+        <version>chargebee-1.0</version>
     </dependency>
   </dependencies>
 
