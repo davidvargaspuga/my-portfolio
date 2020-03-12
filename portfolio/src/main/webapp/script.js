@@ -44,23 +44,19 @@ function topFunction() {
 // with comment data.
 fetch('/data').then(response => response.json()).then((data) => {
     var displayComments = document.getElementById('display-comments');
-    var comment;
-    var email;
 
     //retrieves comment and email and displays
     for (var i = 0; i < data.comments.length; i++) {
-        comment = data.comments[i];
-        email = data.email[i];
-        displayComments.innerHTML += "" + email + ": "+ comment + "<br/>";
+        displayComments.innerHTML += "" + data.email[i] + ": "+ data.comments[i] + "<br/>";
     }
 });
 
 // If user is logged in, display website
 // Otherwise, ask to login.
 // isLoggedIn: boolean of false or string of login here message
-fetch('/login').then(response => response.json()).then((isLoggedIn) => {
-    if(isLoggedIn) document.getElementById("comment-form").style.display = "block";
-    else document.getElementById("login-message").innerHTML = isLoggedIn;
+fetch('/login').then(response => response.json()).then((data) => {
+    if(data.isLoggedIn) document.getElementById("comment-form").style.display = "block";
+    else document.getElementById("login-message").innerHTML = "Login Here";
 });
 
 

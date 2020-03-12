@@ -44,7 +44,6 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // initialize comments list and query
-    // List<String> commentsList = new ArrayList<>();
     try {
         JSONArray commentList = new JSONArray();
         JSONArray emailList = new JSONArray();
@@ -61,15 +60,11 @@ public class DataServlet extends HttpServlet {
             String emailFromData = (String) entity.getProperty("email");
             commentList.put(commentFromData);
             emailList.put(emailFromData);
-            //   commentsList.add(commentFromData);
         }
 
+        // convert comments list to JSON and send it to main page
         j.put("comments", commentList);
         j.put("email", emailList);
-
-        // convert comments list to JSON and send it to main page
-        // response.setContentType("/index.html;");
-        // String json = new Gson().toJson(commentsList);
         response.getWriter().println(j);
      } catch (JSONException e) {
          throw new RuntimeException(e);

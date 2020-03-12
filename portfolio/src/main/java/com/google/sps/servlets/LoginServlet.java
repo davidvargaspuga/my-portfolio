@@ -22,6 +22,10 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONString;
 import java.io.IOException;
 import com.google.gson.Gson;
 import java.io.PrintWriter;
@@ -35,21 +39,29 @@ public class LoginServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html");
-    PrintWriter out = response.getWriter();
-    UserService userService = UserServiceFactory.getUserService();
-    
-    String loginURL = userService.createLoginURL("/");
-    boolean isLoggedIn = userService.isUserLoggedIn();
+    // response.setContentType("text/html");
+    try {
+        PrintWriter out = response.getWriter();
+        UserService userService = UserServiceFactory.getUserService();
+        
+        String loginURL = userService.createLoginURL("/");
+        boolean isLoggedIn = userService.isUserLoggedIn();
 
-    //returns login link as a string if not logged in
-    // otherwise, returns true as a boolean
-    if(!isLoggedIn){
-        out.println("<p>Login <a href=\"" + loginURL + "\">here</a> to comment!</p>");
-        return;
-    } else{
-        String json = new Gson().toJson(isLoggedIn);
-        out.println(json);
-    } 
+        JSONObject data = new JSONObject();
+        data.put("isLoggedIn", isLoggedIn);
+        data.put("loginURL", loginURL);
+        response.getWriter().println(data);
+    } catch (JSONException e) {
+         throw new RuntimeException(e);
+    }
+    // //returns login link as a string if not logged in
+    // // otherwise, returns true as a boolean
+    // if(!isLoggedIn){
+    //     out.println("<p>Login <a href=\"" + loginURL + "\">here</a> to comment!</p>");
+    //     return;
+    // } else{
+    //     String json = new Gson().toJson(isLoggedIn);
+    //     out.println(json);
+    // } 
   }
 }
