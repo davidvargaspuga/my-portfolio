@@ -42,21 +42,21 @@ function topFunction() {
 // https://www.quora.com/How-can-I-make-a-comment-box-in-HTML
 // This code gets comment data from the /data backend path and updates the #display-comments element
 // with comment data.
-fetch('/data').then(response => response.json()).then((comments) => {
+fetch('/data').then(response => response.json()).then((data) => {
     var displayComments = document.getElementById('display-comments');
 
-    comments.forEach((comment) => {
-        console.log(comment);
-        displayComments.innerHTML += "" + comment + "<br/>";
-    })
+    //retrieves comment and email and displays
+    for (var i = 0; i < data.comments.length; i++) {
+        displayComments.innerHTML += "" + data.email[i] + ": "+ data.comments[i] + "<br/>";
+    }
 });
 
 // If user is logged in, display website
 // Otherwise, ask to login.
 // isLoggedIn: boolean of false or string of login here message
-fetch('/login').then(response => response.json()).then((isLoggedIn) => {
-    if(isLoggedIn) document.getElementById("comment-form").style.display = "block";
-    else document.getElementById("login-message").innerHTML = isLoggedIn;
+fetch('/login').then(response => response.json()).then((data) => {
+    if(data.isLoggedIn) document.getElementById("comment-form").style.display = "block";
+    else document.getElementById("login-message").innerHTML = "Login Here";
 });
 
 
